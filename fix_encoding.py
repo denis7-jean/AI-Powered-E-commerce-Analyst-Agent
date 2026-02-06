@@ -1,6 +1,6 @@
 import os
 
-# 定义干净的文件内容 (UTF-8 No-BOM)
+# Define (UTF-8 No-BOM)
 files = {
     "dbt_shopify/models/staging/sources.yml": """version: 2
 sources:
@@ -33,11 +33,10 @@ LIMIT 5000
 """
 }
 
-# 循环写入文件
+# cycle
 for path, content in files.items():
-    # 确保目录存在
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    # 强制以 UTF-8 (无 BOM) 格式写入
+    # force UTF-8 (no BOM) 
     with open(path, 'w', encoding='utf-8') as f:
         f.write(content)
     print(f"✅ Fixed: {path}")
