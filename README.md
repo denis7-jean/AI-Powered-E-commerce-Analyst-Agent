@@ -71,37 +71,72 @@ graph TD
 3. **Self-Correction:** The agent analyzes SQL errors and attempts to fix them autonomously.
 4. **Insight Generation:** Goes beyond just showing numbers; the AI explains *why* the data matters (e.g., identifying low-conversion items).
 
-## 🚀 How to Run Locally
+## 🚀 Getting Started
 
-1. **Clone the repository**
+### Prerequisites
+* Python 3.11+
+* Google Cloud SDK (`gcloud`)
+* A GCP Project with BigQuery & Vertex AI enabled
+
+### 1. Installation
+Clone the repo and install dependencies:
 ```bash
-git clone [https://github.com/YOUR_USERNAME/shopify-ai-agent.git](https://github.com/YOUR_USERNAME/shopify-ai-agent.git)
-cd shopify-ai-agent
+git clone [https://github.com/denis7-jean/AI-Powered-E-commerce-Analyst-Agent.git](https://github.com/denis7-jean/AI-Powered-E-commerce-Analyst-Agent.git)
+cd AI-Powered-E-commerce-Analyst-Agent
 
-```
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
 
-
-2. **Install dependencies**
-```bash
+# Install packages
 pip install -r requirements.txt
 
 ```
 
+### 2. Authentication
 
-3. **Set up GCP Credentials**
-Ensure you have the Google Cloud SDK installed and authenticated:
+This project uses **Application Default Credentials (ADC)**. No need to manage `.json` keys manually.
+
 ```bash
 gcloud auth application-default login
+gcloud config set project shopify-mvp-2026
 
 ```
 
+### 3. dbt Configuration
 
-4. **Run the App**
+Since `profiles.yml` contains sensitive information, it is not included in the repo.
+To run dbt locally, create a `~/.dbt/profiles.yml` (User home directory) with the following structure:
+
+```yaml
+shopify_analytics:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: oauth
+      project: shopify-mvp-2026
+      dataset: shopify_mvp
+      threads: 1
+      location: US
+
+```
+
+### 4. Run the Agent
+
 ```bash
 streamlit run app.py
 
 ```
 
+### 5. Deployment (Cloud Run)
+
+The project includes a `Dockerfile` for serverless deployment:
+
+```bash
+gcloud run deploy shopify-agent --source . --region us-central1 --allow-unauthenticated
+
+```
 
 
 ## 👨‍💻 Author
