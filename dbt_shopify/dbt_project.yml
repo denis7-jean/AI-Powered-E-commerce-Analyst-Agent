@@ -1,0 +1,9 @@
+﻿name: 'shopify_analytics'
+version: '1.0.0'
+config-version: 2
+profile: 'shopify_bq'
+model-paths: ["models"]
+models:
+  shopify_analytics:
+    # 将所有模型物化为视图，节省存储
+    materialized: view

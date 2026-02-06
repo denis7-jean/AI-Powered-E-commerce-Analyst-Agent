@@ -1,0 +1,8 @@
+version: 2
+sources:
+  - name: retailrocket
+    database: shopify-mvp-2026
+    schema: shopify_mvp
+    tables:
+      - name: raw_events
+      - name: raw_item_properties

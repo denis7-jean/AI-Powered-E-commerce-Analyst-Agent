@@ -1,0 +1,26 @@
+# .gitignore
+__pycache__/
+*.pyc
+venv/
+.env
+.DS_Store
+
+# --- IDE ---
+.idea/
+.vscode/
+
+# --- Data ---
+Rawdata/
+*.csv
+
+# --- dbt ---
+dbt_packages/
+dbt_shopify/target/
+dbt_shopify/logs/
+dbt_shopify/profiles.yml
+
+# --- Google Cloud ---
+key.json
+secrets.toml
+
+dbt_shopify/.user.yml
